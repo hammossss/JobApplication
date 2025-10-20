@@ -1,0 +1,48 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace Application
+{
+    public enum Status
+    {
+        Applied,
+        Interview,
+        Offer,
+        Rejected
+    }
+    public class JobApplication
+    {
+        public Status Status { get; internal set; }
+
+        //CompanyName | string
+        //PositionTitle | string
+        //Status | enum - (Applied, Interview, Offer, Rejected)
+        //ApplicationDate | DateTime - Datum när ansökan skickades
+        //ResponseDate | DateTime? - Datum när svar mottogs
+        //SalaryExpectation | int - Önskad lön i kronor
+
+        public string CompanyName { get; set; }
+        public string PositionTitle { get; set; }
+        public DateTime ApplicationDate { get; set; }
+        public DateTime? ResponseDate { get; set; }
+        public int SalaryExpectation { get; set; }
+        
+
+        // Metoder
+        // GetDaysSinceApplied() – returnerar antal dagar sedan ansökan skickades.
+        // GetSummary() – returnerar en kort sammanfattning av ansökan.
+
+        public int GetDaysSinceApplied()
+        {
+            return (DateTime.Now - ApplicationDate).Days;
+        }
+        public string GetSummary()
+        {
+            return $"{PositionTitle} at {CompanyName}, applied on {ApplicationDate.ToShortDateString()}, status: {Status}, salary expectation: {SalaryExpectation} SEK";
+        }
+    }
+}
